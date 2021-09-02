@@ -1,0 +1,320 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 100%;
+}
+
+body {
+    background-color: #dddd;
+    font-family: Georama, Arial;
+    font-size: 18px;
+    margin: 50px;
+    min-height: 2500px;
+    padding-top: 25px;
+}
+
+/* container */
+.container {
+    display: grid;
+    gap: 10px;
+}
+
+
+/* Header */
+.header {
+    display: grid;
+    grid-template-areas:
+        'hero hero feature-1'
+        'hero hero feature-2';
+}
+
+.hero {
+    grid-area: hero;
+    min-height: 450px;
+    background-image: url(img/Herorz.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+.hero>* {
+    display: none;
+}
+
+.features {
+    background-color: black;
+    color: yellowgreen;
+    display: grid;
+    /* justify-content: center;
+    align-content: center; */
+    /* gunakan shorthand dengan place-content */
+    place-content: start end;
+    text-align: right;
+    cursor: pointer;
+}
+
+.feature-1 {
+    grid-area: feature-1;
+    background-image: url(img/f1.jpg);
+    background-size: cover;
+}
+
+.feature-2 {
+    grid-area: feature-2;
+    background-image: url(img/f2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.features .price {
+    font-size: 3em;
+    font-weight: 200;
+}
+
+.menu {
+    order: -1;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background-color: lawngreen;
+    align-items: center;
+    
+    
+}
+
+.menu .brand {
+    font-size: 1.3em;
+    color: grey;
+}
+
+.menu ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    /* align-content: center; */
+
+    /* beri jarak antara komponen didalam ul */
+    /* column-gap: 4px; */
+    gap: 5px;
+
+}
+
+.menu a {
+    /* Supaya di klik jadi 1 block atau kotak, bukan sekedar tulisan */
+    display: block;
+    background-color: lightblue;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px;
+
+    /* ubah ke hurufbesar pada komponen navigasinya */
+    text-transform: uppercase;
+
+    /* kecilkan huruf dari standarnya */
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    height: 20px;
+    /* background-color: black; */
+    justify-content: space-between;
+    position: relative;
+
+}
+
+.menu-toggle input {
+    position: absolute;
+    width: 50px;
+    height: 28px;
+    opacity: 0%;
+    top: -5px;
+    left: -11px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: black;
+    border-radius: 3px;
+    transition: all 1s;
+}
+
+/* Hamburger Menu Animation */
+.menu-toggle span:nth-child(2) {
+    /* background-color: red; */
+
+    /* menggeser sumbu utama pusatnya di x,y 0,0 kiri */
+    transform-origin: 0 0;
+}
+
+.menu-toggle input:checked~span:nth-child(2) {
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.menu-toggle span:nth-child(4) {
+    /* background-color: red; */
+
+    /* menggeser sumbu utama pusatnya di x,y 0,0 kiri */
+    transform-origin: 0 100%;
+}
+
+.menu-toggle input:checked~span:nth-child(4) {
+    /* background-color: red; */
+    transform: rotate(-45deg) translate(-1px, 0);
+}
+
+/* Yang tengah begitu di input checked span tengah perkecil dan hilang */
+/* juga tanpa transform origin */
+.menu-toggle input:checked~span:nth-child(3) {
+    /* background-color: red; */
+    opacity: 0;
+    transform: scale(0);
+}
+
+/* Services */
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.service {
+    background-color: white;
+    padding: 15px;
+    text-align: center;
+    border: 5px solid lightskyblue;
+    border-radius: 20px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+.service h3 {
+    font-size: 1.2em;
+}
+
+.service p {
+    font-weight: 500;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+}
+
+/* Gallery */
+.gallery {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 5px;
+}
+
+.gallery h2 {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+/* Responsive Break Point */
+@media (max-width: 1024px) {
+    .menu {
+        order: inherit;
+        grid-template-columns: 1fr;
+    }
+
+    .menu .brand {
+        display: none;
+    }
+
+    .hero>* {
+        display: block;
+        background-color: black;
+        color: white;
+        padding: 5px;
+        margin-bottom: 5px;
+    }
+
+    .hero {
+        display: flex;
+        flex-direction: column;
+
+        /* Ingat defaultnya flex direction row, kalau jadi column 
+        merubah arah, justify = y, align = x */
+        justify-content: center;
+        align-items: start;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .menu {
+        order: -1;
+        justify-items: right;
+    }
+
+    /* dari copy paste hamburger menu  */
+    .menu-toggle {
+        display: flex;
+        z-index: 3;
+    }
+
+    /* menu ul diolah muncul dgn berbeda saat diresize ke layar HP */
+    /* display = flex sudah terset di atas atas, jadi tinggal atur position langsung aja */
+    .menu ul {
+        /* display: none; */
+        display: flex;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: lightblue;
+        width: 100%;
+        z-index: 2;
+        align-items: center;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 1s;
+    }
+
+    .menu ul.slide {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    nav.menu {
+        padding-right: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        grid-template-areas:
+            'hero'
+            'feature-1'
+            'feature-2';
+    }
+
+    body {
+        margin: 20px;
+    }
+
+    .features {
+        padding-bottom: 95px;
+    }
+
+    nav.menu {
+        padding-right: 1px;
+    }
+
+    
+
+}
